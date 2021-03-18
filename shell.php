@@ -141,10 +141,12 @@ if(!empty($_FILES['uploaded_file']))
   }
 
   table, th, td {
-    border: 1px solid white;
-    padding: 5px 150px 5px;
     text-align:center;
     width:auto;
+  }
+
+  .t-b {
+    background:#1c1b1b
   }
 
   </style>
@@ -269,8 +271,8 @@ if($_POST['type'] == 'dir') {
 
 }
 ?>
-<table class="tab">
-  <thead>
+<table class="table table-borderless table-sm t-b">
+<thead class="thead-dark">
   <tr>
       <th scope="col">Name</th>
       <th scope="col">Size</th>
@@ -284,13 +286,13 @@ foreach($scandir as $dir) {
 if(!is_dir("$path/$dir") || $dir == '..' || $dir == '.') continue;?>
 
   <tr>
-    <td class="td_home"><a href="?path=<?php echo $path.'/'.$dir; ?>"><?php echo $dir; ?></a></td>
-    <td class="td_home"><font size="1px" color=lime>DIR</font></td>
+    <td class="td_home"><b><a href="?path=<?php echo $path.'/'.$dir; ?>"><?php echo $dir; ?></a></b></td>
+    <td class="td_home"><font size="3px" color=white><b>DIR</b></font></td>
     <td class="td_home"><?php
-if(is_writable("$path/$dir")) echo '<font color=lime>';
+if(is_writable("$path/$dir")) echo '<font color=white><b>';
 elseif(!is_readable("$path/$dir")) echo '<font color="#FF0004">';
 echo perms("$path/$dir");
-if(is_writable("$path/$dir") || !is_readable("$path/$dir")) echo '</font></td>'; ?>
+if(is_writable("$path/$dir") || !is_readable("$path/$dir")) echo '</b></font></td>'; ?>
 
     <td class="td_home">
       <form method="post">
@@ -322,10 +324,10 @@ $size = $size.' KB';
     <td class="td_home"><a href="?filesrc=<?php echo $path.'/'.$file; ?>"><?php echo $file; ?></a></td>
     <td class="td_home"><?php echo $size; ?></td>
     <td class="td_home"><?php
-if(is_writable("$path/$file")) echo '<font color=lime>';
+if(is_writable("$path/$file")) echo '<font color=white><b>';
 elseif(is_readable("$path/$file")) echo '<font color="#FF0004">';
 echo perms("$path/$file");
-if(is_writable("$path/$file") || !is_readable("$path/$file")) echo '</font>';
+if(is_writable("$path/$file") || !is_readable("$path/$file")) echo '</b></font>';
 echo '</td>';?>
     <td class="td_home">
       
@@ -347,7 +349,7 @@ echo '</td>';?>
 }
 ?>
     <tr>
-    <td colspan="4">r4sso@github.com</td>
+    <td colspan="4"><b>r4sso@github.com</b></td>
     </tr>
   </table>
 </body>
